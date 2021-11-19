@@ -28,7 +28,7 @@ function Create({create}) {
 
     return (
         <div className="form-group">
-            <h2>Add new </h2>
+            <h2>Add new scooter</h2>
             <div className="form-group">
                 <div>Registration code</div><input type="text" value={input.registration_code} onChange={(e) => formControl(e, 'registration_code')} />
             </div>
