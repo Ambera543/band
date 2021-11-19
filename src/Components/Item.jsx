@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 function Item({ data, modal, remove }) {
   const showEdit = () => {
@@ -11,13 +11,13 @@ function Item({ data, modal, remove }) {
     } else return "no";
   }
 
-  const [value, setValue] = useState([false, true, false, true])
+  // const [value, setValue] = useState([false, true, false, true])
 
-    const change = i => {
-        const valueCopy = value.slice();
-        valueCopy[i] = !valueCopy[i]
-        setValue(valueCopy);
-    }
+  //   const change = i => {
+  //       const valueCopy = value.slice();
+  //       valueCopy[i] = !valueCopy[i]
+  //       setValue(valueCopy);
+  //   }
   
 
 
@@ -35,10 +35,10 @@ function Item({ data, modal, remove }) {
       <tr>
         <td>{data.registration_code}</td>
 
-        <td>{is_busy()} <input onChange={() => change(0)} type="checkbox" checked={value[0]}/> </td>
-        <td>{data.last_use_time.slice(0, 10)}
+        <td>{is_busy()} <input type="checkbox" /> </td>
+        <td><div>{data.last_use_time.slice(0, 10)}</div>
         <input type="date" /></td>
-        <td>{data.total_ride_kilometres}
+        <td><div>{data.total_ride_kilometres}</div>
         <input type="text" /></td>
         <td>
           <button className="btn btn-primary" onClick={showEdit}>
@@ -57,3 +57,5 @@ function Item({ data, modal, remove }) {
 }
 
 export default Item;
+
+//  <input onChange={() => change(0)} type="checkbox" checked={value[0]}/>
