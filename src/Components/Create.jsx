@@ -7,7 +7,7 @@ function Create({create}) {
 
     const [input, setInput] = useState({
         registration_code: "",
-        is_busy: "",
+        is_busy: "0",
         last_use_time: "",
         total_ride_kilometres: "",
     })
@@ -27,22 +27,22 @@ function Create({create}) {
     }
 
     return (
-        <div className="zoo_form">
+        <div className="form-group">
             <h2>Add new </h2>
-            <div className="zoo_form_input">
-                <span>Name</span><input type="text" value={input.registration_code} onChange={(e) => formControl(e, 'registration_code')} />
+            <div className="form-group">
+                <div>Registration code</div><input type="text" value={input.registration_code} onChange={(e) => formControl(e, 'registration_code')} />
             </div>
-            <div className="zoo_form_input">
-            <span>Type</span><input type="text" value={input.is_busy} onChange={(e) => formControl(e, 'is_busy')} />
+            {/* <div className="form-group">
+            <div>Busy</div><input type="text" value={input.is_busy} onChange={(e) => formControl(e, 'is_busy')} />
+            </div> */}
+            <div className="form-group">
+            <div>Total ride kilometres</div><input type="text" value={input.total_ride_kilometres} onChange={(e) => formControl(e, 'total_ride_kilometres')} />
             </div>
-            <div className="zoo_form_input">
-            <span>total_ride_kilometres</span><input type="text" value={input.total_ride_kilometres} onChange={(e) => formControl(e, 'total_ride_kilometres')} />
+            <div className="form-group">
+            <div> Last used</div><input type="date" value={input.last_use_time.slice(0, 10)} onChange={(e) => formControl(e, 'last_use_time')} />
             </div>
-            <div className="zoo_form_input">
-            <span>Born date</span><input type="date" value={input.last_use_time} onChange={(e) => formControl(e, 'last_use_time')} />
-            </div>
-            <div className="zoo_form_input_button">
-            <button onClick={handleCreate}>Add</button>
+            <div className="form-group">
+            <button className="btn btn-primary" onClick={handleCreate}>Add</button>
             </div>
         </div>
     )

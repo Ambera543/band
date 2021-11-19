@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import List from "./Components/List";
@@ -16,9 +16,20 @@ function App() {
     total_ride_kilometres: "",
   });
 
-  const reset = () => {
-    setLastUpdate(Date.now());
-  };
+  // const reset = () => {
+  //   setLastUpdate(Date.now());
+  // };
+  // const dateOnly = (data) => {
+  //   return data.map((a) => {
+  //     a.last_received = a.started_work.slice(0, 10);
+  //     return a;
+  //   });
+  // };
+
+  // const [filterBy, setFilterBy] = useState("");
+  // const [searchBy, setSearchBy] = useState("");
+
+  //Read React
 
   //Read React
   useEffect(() => {
@@ -38,13 +49,30 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-  const remove = (id) => {
-    setShowModal(false);
-    axios.delete("http://localhost:3003/scooters/" + id).then((res) => {
-      console.log(res.data);
-      setLastUpdate(Date.now());
-    });
-  };
+  // useEffect(() => {
+  //   if (filterBy) {
+  //     if (filterBy === "all") {
+  //       reset();
+  //     }
+  //     axios
+  //       .get("http://localhost:3003/scooters-filter/" + filterBy)
+  //       .then((res) => {
+  //         setTable(dateOnly(res.data));
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [filterBy]);
+
+  // useEffect(() => {
+  //   if (searchBy) {
+  //     axios
+  //       .get("http://localhost:3003/scooters-surname/?s=" + searchBy)
+  //       .then((res) => {
+  //         setTable(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [searchBy]);
 
   //Update React
   const edit = (item, id) => {
@@ -65,36 +93,39 @@ function App() {
   const hide = () => {
     setShowModal(false);
   };
+  const remove = (id) => {
+    axios
+      .delete("http://localhost:3003/scooters/" + id)
+      .then((res) => {
+        setLastUpdate(Date.now());
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <div className="App">
+    <div className="App bg-light">
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div className="card">
-              <div className="card-header">List of X</div>
-              <div className="card-body">
-                <table className="table">
-                  return (
-                  <div className="zoo">
-                   
-                    <Create create={create}></Create>
-                    <List table={table} modal={modal}></List>
-                    <Modal
-                      edit={edit}
-                      remove={remove}
-                      hide={hide}
-                      scooters={modal}
-                      showModal={showModal}
-                    ></Modal>
-                  </div>
-                  ); 
-                </table>
-              </div>
-            </div>
+      <Create className="justify-content-center" create={create}></Create>
+        <div className="justify-content-center">
+          
+            <div className="card-header">List of scooters</div>
+
+            <List table={table} modal={modal} remove={remove}/>
+
+            <Modal
+              showModal={showModal}
+              modalInputs={modalInputs}
+              hide={hide}
+              edit={edit}
+              
+            />
+          
           </div>
         </div>
-      </div>
+        <div >
+         
+        </div>
+     
     </div>
   );
 }

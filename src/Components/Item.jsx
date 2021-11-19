@@ -1,24 +1,59 @@
-function Item ({ scooters, modal }) {
-    const showEdit = () => {
-      modal(scooters)
-    }
-  
-    return (
-      <div className="zoo_list_scooters">
-        <div className="zoo_list_scooters_name">{scooters.name}</div>
-        <div className="zoo_list_scooters_type">{scooters.type}</div>
-        <div className="zoo_list_scooters_stats">
-          
-          <span><i>Born date:</i> {scooters.born}</span>
-          
-          <span>
-            <i>total_ride_kilometres:</i> {scooters.total_ride_kilometres} kg.
-          </span>
-        </div>
-        <button onClick={showEdit}>Edit</button>
-      </div>
-    );
+import { useState } from "react";
+
+function Item({ data, modal, remove }) {
+  const showEdit = () => {
+    modal(data);
+  };
+
+  function is_busy() {
+    if (data.is_busy > 0) {
+      return "yes";
+    } else return "no";
   }
 
-  export default Item;
+  const [value, setValue] = useState([false, true, false, true])
+
+    const change = i => {
+        const valueCopy = value.slice();
+        valueCopy[i] = !valueCopy[i]
+        setValue(valueCopy);
+    }
   
+
+
+  return (
+    <table className="table">
+      <tbody>
+      <tr>
+        <th>Registration code</th>
+        <th>Busy</th>
+        <th>Last use time</th>
+        <th>Total ride kilometres</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <tr>
+        <td>{data.registration_code}</td>
+
+        <td>{is_busy()} <input onChange={() => change(0)} type="checkbox" checked={value[0]}/> </td>
+        <td>{data.last_use_time.slice(0, 10)}
+        <input type="date" /></td>
+        <td>{data.total_ride_kilometres}
+        <input type="text" /></td>
+        <td>
+          <button className="btn btn-primary" onClick={showEdit}>
+            Redaguoti
+          </button>
+        </td>
+        <td>
+          <button className="btn btn-primary" onClick={() => remove(data.id)}>
+            Trinti
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  );
+}
+
+export default Item;
