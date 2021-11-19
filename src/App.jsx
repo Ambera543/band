@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
+import Stats from "./Components/Stats";
 
 function App() {
   const [table, setTable] = useState([]);
@@ -16,6 +17,12 @@ function App() {
     total_ride_kilometres: "",
   });
 
+  const [stats, setStats] = useState({
+    count: 0,
+    kilometres: 0,
+    
+  });
+  // const [groupStats, setGroupStats] = useState([]);
   // const reset = () => {
   //   setLastUpdate(Date.now());
   // };
@@ -49,6 +56,20 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3003/stats").then((res) => {
+      setStats(res.data[0]);
+    });
+  }, [lastUpdate]);
+
+  // useEffect(() => {
+  //     axios.get('http://localhost:3003/group-stats')
+  //         .then(res => {
+  //             setGroupStats(res.data);
+  //         })
+  // }, [lastUpdate])
+
   // useEffect(() => {
   //   if (filterBy) {
   //     if (filterBy === "all") {
@@ -105,29 +126,26 @@ function App() {
   return (
     <div className="App bg-light">
       <div className="container">
-      <Create className="justify-content-center" create={create}></Create>
+        <Stats stats={stats}></Stats>
+        <Create className="justify-content-center" create={create}></Create>
         <div className="justify-content-center">
-          
-            <div className="card-header">List of scooters</div>
+          <div className="card-header">List of scooters</div>
 
-            <List table={table} modal={modal} remove={remove}/>
+          <List table={table} modal={modal} remove={remove} />
 
-            <Modal
-              showModal={showModal}
-              modalInputs={modalInputs}
-              hide={hide}
-              edit={edit}
-              
-            />
-          
-          </div>
+          <Modal
+            showModal={showModal}
+            modalInputs={modalInputs}
+            hide={hide}
+            edit={edit}
+          />
         </div>
-        <div >
-         
-        </div>
-     
+      </div>
+  
     </div>
   );
 }
 
 export default App;
+
+//  <Stats stats={stats} groupStats={groupStats}></Stats> 
