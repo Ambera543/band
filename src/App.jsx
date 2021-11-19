@@ -1,15 +1,17 @@
 import "./App.scss";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
 import Stats from "./Components/Stats";
 
+
 function App() {
   const [table, setTable] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
+  
   const [modalInputs, setModalInputs] = useState({
     registration_code: "",
     is_busy: "",
@@ -22,21 +24,12 @@ function App() {
     kilometres: 0,
     
   });
-  // const [groupStats, setGroupStats] = useState([]);
+  
   // const reset = () => {
   //   setLastUpdate(Date.now());
-  // };
-  // const dateOnly = (data) => {
-  //   return data.map((a) => {
-  //     a.last_received = a.started_work.slice(0, 10);
-  //     return a;
-  //   });
+
   // };
 
-  // const [filterBy, setFilterBy] = useState("");
-  // const [searchBy, setSearchBy] = useState("");
-
-  //Read React
 
   //Read React
   useEffect(() => {
@@ -63,37 +56,7 @@ function App() {
     });
   }, [lastUpdate]);
 
-  // useEffect(() => {
-  //     axios.get('http://localhost:3003/group-stats')
-  //         .then(res => {
-  //             setGroupStats(res.data);
-  //         })
-  // }, [lastUpdate])
-
-  // useEffect(() => {
-  //   if (filterBy) {
-  //     if (filterBy === "all") {
-  //       reset();
-  //     }
-  //     axios
-  //       .get("http://localhost:3003/scooters-filter/" + filterBy)
-  //       .then((res) => {
-  //         setTable(dateOnly(res.data));
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [filterBy]);
-
-  // useEffect(() => {
-  //   if (searchBy) {
-  //     axios
-  //       .get("http://localhost:3003/scooters-surname/?s=" + searchBy)
-  //       .then((res) => {
-  //         setTable(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [searchBy]);
+  
 
   //Update React
   const edit = (item, id) => {
@@ -130,7 +93,7 @@ function App() {
         <Create className="justify-content-center" create={create}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>
-
+        
           <List table={table} modal={modal} remove={remove} />
 
           <Modal
@@ -148,4 +111,3 @@ function App() {
 
 export default App;
 
-//  <Stats stats={stats} groupStats={groupStats}></Stats> 
