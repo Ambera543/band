@@ -1,16 +1,18 @@
 import "./App.scss";
 import axios from "axios";
-import { useEffect, useState} from "react";
+import { useEffect, useState, useRef} from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
 import Stats from "./Components/Stats";
+import Nav from "./Components/Nav";
 
 
 function App() {
   const [table, setTable] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
+  const sortBy = useRef('');
   
   const [modalInputs, setModalInputs] = useState({
     registration_code: "",
@@ -25,10 +27,22 @@ function App() {
     
   });
   
-  // const reset = () => {
-  //   setLastUpdate(Date.now());
+  const reset = () => {
+    setLastUpdate(Date.now());
 
-  // };
+  };
+  const sort = (by) => {
+    setTable(tableSort(table, by));
+    sortBy.current = by;
+}
+
+useEffect(() => {
+  axios.get("http://localhost:3003/scooters").then((res) => {
+    // setAnimal(tableSort(dateOnly(res.data), sortBy));
+    setTable(tableSort(res.data), sortBy.current);
+    console.log(res.data);
+  });
+}, [lastUpdate]);
 
 
   //Read React
@@ -54,10 +68,8 @@ function App() {
     axios.get("http://localhost:3003/stats").then((res) => {
       setStats(res.data[0]);
     });
-  }, [lastUpdate]);
-
+  }, [lastUpdate])
   
-
   //Update React
   const edit = (item, id) => {
     setShowModal(false);
@@ -90,6 +102,8 @@ function App() {
     <div className="App bg-light">
       <div className="container">
         <Stats stats={stats}></Stats>
+        <Nav  sort={sort}
+        reset={reset}></Nav>
         <Create className="justify-content-center" create={create}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>
