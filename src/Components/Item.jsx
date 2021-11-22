@@ -37,9 +37,9 @@ function Item({ data, modal, remove }) {
 
         <td>{is_busy()} <input type="checkbox" /> </td>
         <td><div>{data.last_use_time.slice(0, 10)}</div>
-        <input type="date" /></td>
+     </td>
         <td><div>{data.total_ride_kilometres}</div>
-        <input type="text" /></td>
+        </td>
         <td>
           <button className="btn btn-primary" onClick={showEdit}>
             Redaguoti
