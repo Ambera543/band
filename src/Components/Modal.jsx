@@ -93,7 +93,7 @@ function Modal({ showModal, hide, modalInputs, edit }) {
               </div>
 
               <div className="form-group">
-                <label className="col-form-label">Total ride kilometres</label>
+                <label className="col-form-label">Ride kilometres</label>
                 <input
                   className="form-control"
                   type="text"

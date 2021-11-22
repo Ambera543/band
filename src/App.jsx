@@ -1,19 +1,19 @@
 import "./App.scss";
 import axios from "axios";
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
 import Stats from "./Components/Stats";
-import Nav from "./Components/Nav";
-
+// import Nav from "./Components/Nav";
+import sort from "./Components/sort";
 
 function App() {
   const [table, setTable] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
-  const sortBy = useRef('');
-  
+  // const sortBy = useRef('');
+
   const [modalInputs, setModalInputs] = useState({
     registration_code: "",
     is_busy: "",
@@ -24,26 +24,30 @@ function App() {
   const [stats, setStats] = useState({
     count: 0,
     kilometres: 0,
-    
   });
-  
+
   const reset = () => {
     setLastUpdate(Date.now());
-
   };
-  const sort = (by) => {
-    setTable(tableSort(table, by));
-    sortBy.current = by;
-}
+  //   const sort = (by) => {
+  //     setTable(itemSort(item, by));
+  //     sortBy.current = by;
+  // }
 
-useEffect(() => {
-  axios.get("http://localhost:3003/scooters").then((res) => {
-    // setAnimal(tableSort(dateOnly(res.data), sortBy));
-    setTable(tableSort(res.data), sortBy.current);
-    console.log(res.data);
-  });
-}, [lastUpdate]);
+  // useEffect(() => {
+  //   axios.get("http://localhost:3003/scooters").then((res) => {
+  //     // setAnimal(tableSort(dateOnly(res.data), sortBy));
+  //     setTable(tableSort(res.data), sortBy.current);
+  //     console.log(res.data);
+  //   });
+  // }, [lastUpdate]);
 
+  const sortConditions = useRef("");
+  const handleSort = () => {
+    if (sortConditions.current) {
+      setTable(sort(table, sortConditions.current));
+    }
+  };
 
   //Read React
   useEffect(() => {
@@ -68,8 +72,8 @@ useEffect(() => {
     axios.get("http://localhost:3003/stats").then((res) => {
       setStats(res.data[0]);
     });
-  }, [lastUpdate])
-  
+  }, [lastUpdate]);
+
   //Update React
   const edit = (item, id) => {
     setShowModal(false);
@@ -102,12 +106,16 @@ useEffect(() => {
     <div className="App bg-light">
       <div className="container">
         <Stats stats={stats}></Stats>
-        <Nav  sort={sort}
-        reset={reset}></Nav>
+        {/* <Nav
+          sortConditions={sortConditions}
+          handleSort={handleSort}
+          sort={sort}
+          reset={reset}
+        ></Nav> */}
         <Create className="justify-content-center" create={create}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>
-        
+
           <List table={table} modal={modal} remove={remove} />
 
           <Modal
@@ -118,10 +126,8 @@ useEffect(() => {
           />
         </div>
       </div>
-  
     </div>
   );
 }
 
 export default App;
-
