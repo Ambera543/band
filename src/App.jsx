@@ -124,7 +124,7 @@ function App() {
     axios
       .put("http://localhost:3003/scooters/" + id, item)
       .then((res) => {
-        addMsg('Record was deleted successfully.');
+        addMsg('Record was edited successfully.');
         setLastUpdate(Date.now());
       })
       .catch((err) => console.log(err));
@@ -154,7 +154,7 @@ function App() {
       <div className="container">
         <Stats stats={stats}></Stats>
         <Nav sort={setSortBy} reset={reset}></Nav>
-        <Create className="justify-content-center" create={create}></Create>
+        <Create className="justify-content-center" create={create} reset={reset}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>
 

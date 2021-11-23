@@ -41,14 +41,15 @@
   min-width: 100vw;
   min-height: 100vh;
   &_nav {
-    height: 100px;
+    height: 50px;
     background-color: lightblue;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    margin-left: 10px;
     &_filter {
         font-size: 18px;
-        margin: 20px;
+       padding: 20px;
         span {
             padding: 0 7px;
             color: white;
@@ -209,3 +210,16 @@
   margin: 8px;
   box-sizing: border-box;
 }
+
+.msg {
+  background-color: lightcoral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s;
+  overflow: hidden;
+  span {
+      padding: 5px;
+      margin: 5px;
+      color: black;
+  }}
