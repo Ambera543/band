@@ -8,7 +8,7 @@ function Stats({stats, sort}) {
                 <div><i>Scooters Kilometres:</i> <b>{stats.kilometres} km</b></div>
                 
             </div>
-            <div className="card">
+            {/* <div className="card">
                         <div className="card-body" style={{ height: "150px", backgroundColor: 'lightblue'}}>
                             <h5 className="card-title" style={{ marginBottom: "25px" }}>Sort BY:</h5>
                             <button type="button" class="btn btn-primary mx-4" onClick={() => sort("total_ride_kilometres")}>
@@ -18,7 +18,7 @@ function Stats({stats, sort}) {
                              Last use time
                             </button>
                         </div>
-                    </div>
+                    </div> */}
         </div>
     )
 }

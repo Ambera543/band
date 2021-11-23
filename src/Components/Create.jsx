@@ -7,7 +7,7 @@ function Create({create}) {
 
     const [input, setInput] = useState({
         registration_code: "",
-        is_busy: "0",
+        is_busy: "",
         last_use_time: "",
         total_ride_kilometres: "",
     })
@@ -30,7 +30,7 @@ function Create({create}) {
         <div className="form-group">
             <h2>Add new scooter</h2>
             <div className="form-group">
-                <div>Registration code</div><input type="text" value={input.registration_code} onChange={(e) => formControl(e, 'registration_code')} />
+                <div>Registration code</div><input type="text" maxLength="8" value={input.registration_code} onChange={(e) => formControl(e, 'registration_code')} />
             </div>
             {/* <div className="form-group">
             <div>Busy</div><input type="text" value={input.is_busy} onChange={(e) => formControl(e, 'is_busy')} />

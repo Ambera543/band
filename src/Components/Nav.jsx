@@ -18,13 +18,13 @@ function Nav({ reset, sort }) {
       <select onChange={selectSort} value={sortValue}>
         <option value=""> Select scooter</option>
         <option value='kilometres_asc'>
-          By total ride kilometres - 19
+          Total ride kilometres - 1-9
         </option>
         <option value='kilometres_desc'>
-          By total ride kilometres- 91
+          Total ride kilometres- 9-1
         </option>
-        <option value='time_asc'> Last use time - 19</option>
-        <option value='time_desc'>Last use time - 91</option>
+        <option value='time_asc'> Last use time - 1-9</option>
+        <option value='time_desc'>Last use time - 9-1</option>
       </select>
       <div>
         <button className="btn btn-primary" onClick={resetHandler}>
