@@ -1,12 +1,13 @@
 import "./App.scss";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
  import Stats from "./Components/Stats";
 import Nav from "./Components/Nav";
 import sortas from "./Components/sort";
+import ActionMsg from "./Components/ActionMsg"
 
 function App() {
   const [table, setTable] = useState([]);
@@ -29,7 +30,21 @@ function App() {
 
   const reset = () => {
     setLastUpdate(Date.now());
+  
   };
+
+  const [showMsg, setShowMsg] = useState(false);
+  const msg = useRef('');
+
+  const addMsg = (text) => {
+      msg.current = text;
+      setShowMsg(true);
+      setTimeout(() => {clearMsg()}, 2000);
+  }
+
+  const clearMsg = () => {
+      setShowMsg(false)
+  }
   //   const sort = (by) => {
   //     setTable(itemSort(item, by));
   //     sortBy.current = by;
@@ -91,6 +106,7 @@ function App() {
     axios
       .post("http://localhost:3003/scooters", item)
       .then(() => {
+        addMsg('Record successfully saved.');
         setLastUpdate(Date.now());
       })
       .catch((err) => console.log(err));
@@ -108,6 +124,7 @@ function App() {
     axios
       .put("http://localhost:3003/scooters/" + id, item)
       .then((res) => {
+        addMsg('Record was deleted successfully.');
         setLastUpdate(Date.now());
       })
       .catch((err) => console.log(err));
@@ -125,6 +142,7 @@ function App() {
     axios
       .delete("http://localhost:3003/scooters/" + id)
       .then((res) => {
+        addMsg('Record was deleted successfully');
         setLastUpdate(Date.now());
       })
       .catch((err) => console.log(err));
@@ -132,6 +150,7 @@ function App() {
 
   return (
     <div className="App bg-light">
+       <ActionMsg msg={msg.current} showMsg={showMsg}></ActionMsg>
       <div className="container">
         <Stats stats={stats}></Stats>
         <Nav sort={setSortBy} reset={reset}></Nav>

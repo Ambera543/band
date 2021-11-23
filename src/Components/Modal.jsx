@@ -8,6 +8,14 @@ function Modal({ showModal, hide, modalInputs, edit }) {
     total_ride_kilometres: "",
   });
 
+  const [value, setValue] = useState([true])
+
+  const change = i => {
+      const valueCopy = value.slice();
+      valueCopy[i] = !valueCopy[i]
+      setValue(valueCopy);
+  }
+
   const control = (e, what) => {
     const inputsCopy = { ...inputs };
     inputsCopy[what] = e.target.value;
@@ -77,9 +85,7 @@ function Modal({ showModal, hide, modalInputs, edit }) {
                 <label className="col-form-label">Busy</label>
                 <input
                   className="form-control"
-                  type="checkbox"
-                  value={inputs.is_busy}
-                  onChange={(e) => control(e, "is_busy")}
+                  onChange={() => change(0)} type="checkbox" checked={value[0]}
                 />
               </div>
               <div className="form-group">

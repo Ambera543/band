@@ -1,6 +1,6 @@
 // import { useState } from "react";
 
-function Item({ data, modal, remove, inputs }) {
+function Item({ data, modal, remove }) {
   const showEdit = () => {
     modal(data);
   };
@@ -27,7 +27,7 @@ function Item({ data, modal, remove, inputs }) {
           <th>Registration code</th>
           <th>Busy</th>
           <th>Last use time</th>
-          {/* <th>Ride kilometres per day</th> */}
+          <th>Ride kilometres per day</th>
           <th>Total ride kilometres</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -41,9 +41,9 @@ function Item({ data, modal, remove, inputs }) {
           <td>
             <div>{data.last_use_time.slice(0, 10)}</div>
           </td>
-          {/* <td>
-            <div>{ride}</div>
-          </td> */}
+          <td>
+            <div>{data.total_ride_kilometres}</div>
+          </td>
           <td>
             <div>{data.total_ride_kilometres}</div>
           </td>
