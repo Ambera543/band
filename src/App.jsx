@@ -1,17 +1,18 @@
 import "./App.scss";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
 import Stats from "./Components/Stats";
 // import Nav from "./Components/Nav";
-import sort from "./Components/sort";
+// import sort from "./Components/sort";
 
 function App() {
   const [table, setTable] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
+  // const [sortBy, setSortBy] = useState("");
   // const sortBy = useRef('');
 
   const [modalInputs, setModalInputs] = useState({
@@ -42,12 +43,38 @@ function App() {
   //   });
   // }, [lastUpdate]);
 
-  const sortConditions = useRef("");
-  const handleSort = () => {
-    if (sortConditions.current) {
-      setTable(sort(table, sortConditions.current));
+  // const sortConditions = useRef("");
+  // const handleSort = () => {
+  //   if (sortConditions.current) {
+  //     setTable(sort(table, sortConditions.current));
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (sortBy) {
+  //     setTable(sort( sortBy));
+  //   }
+  // }, [sortBy]);
+
+  const sort = by => {
+    const tableCopy = table.slice();
+    if ('last_use_time' === by) {
+      tableCopy.sort((a, b) => {
+        if (a.last_use_time > b.last_use_time) {
+          return 1
+        }
+        if (a.last_use_time < b.last_use_time) {
+          return -1
+        }
+        return 0
+      })
+      setTable(tableCopy)
     }
-  };
+    if ('total_ride_kilometres' === by) {
+     tableCopy.sort((a, b) => a.total_ride_kilometres - b.total_ride_kilometres)
+      setTable(tableCopy)
+    }
+  }
 
   //Read React
   useEffect(() => {
@@ -105,13 +132,8 @@ function App() {
   return (
     <div className="App bg-light">
       <div className="container">
-        <Stats stats={stats}></Stats>
-        {/* <Nav
-          sortConditions={sortConditions}
-          handleSort={handleSort}
-          sort={sort}
-          reset={reset}
-        ></Nav> */}
+        <Stats stats={stats} sort={sort} reset={reset}></Stats>
+        {/* <Nav sort={setSortBy} reset={reset}></Nav> */}
         <Create className="justify-content-center" create={create}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>
@@ -131,3 +153,6 @@ function App() {
 }
 
 export default App;
+
+  // sortConditions={sortConditions}
+          // handleSort={handleSort}

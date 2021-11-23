@@ -1,8 +1,10 @@
+// import Item from "./Item";
+
 function sort(state, by) {
-    const table = state.slice();
+    const tables = state.slice();
     switch (by) {
         case 'kilometres_asc':
-            table.sort((a, b) => {
+            tables.sort((a, b) => {
                 const total_ride_kilometresA = a.total_ride_kilometres.toUpperCase();
                 const total_ride_kilometresB = b.total_ride_kilometres.toUpperCase();
                 if (total_ride_kilometresA < total_ride_kilometresB) {
@@ -15,7 +17,7 @@ function sort(state, by) {
             });
             break;
         case 'kilometres_desc':
-            table.sort((a, b) => {
+            tables.sort((a, b) => {
                 const total_ride_kilometresA = a.total_ride_kilometres.toUpperCase();
                 const total_ride_kilometresB = b.total_ride_kilometres.toUpperCase();
                 if (total_ride_kilometresA < total_ride_kilometresB) {
@@ -28,17 +30,17 @@ function sort(state, by) {
             });
             break;
         case 'time_asc':
-            table.sort(function(a, b) {
+            tables.sort(function(a, b) {
                 return a.last_use_time - b.last_use_time;
             });
             break;
         case 'time_desc':
-            table.sort(function(a, b) {
+            tables.sort(function(a, b) {
                 return b.last_use_time - a.last_use_time;
             });
             break;
         default:
     }
-    return table
+    return tables
 }
 export default sort;

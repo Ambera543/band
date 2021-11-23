@@ -49,12 +49,12 @@ function Item({ data, modal, remove, inputs }) {
           </td>
           <td>
             <button className="btn btn-primary" onClick={showEdit}>
-              Redaguoti
+              Edit
             </button>
           </td>
           <td>
             <button className="btn btn-primary" onClick={() => remove(data.id)}>
-              Trinti
+              Delete
             </button>
           </td>
         </tr>

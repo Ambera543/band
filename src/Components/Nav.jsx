@@ -14,7 +14,7 @@ function Nav({ reset, sort }) {
   };
   return (
     <div className="scooter_nav">
-      {/* <span className="px4">Sort </span> */}
+      <span className="px4">Sort BY </span>
       <select onChange={selectSort} value={sortValue}>
         <option value=""> Select scooter</option>
         <option value='kilometres_asc'>
@@ -23,8 +23,8 @@ function Nav({ reset, sort }) {
         <option value='kilometres_desc'>
           By total ride kilometres- 91
         </option>
-        <option value='time_asc'>By last use time - 19</option>
-        <option value='time_desc'>By last use time - 91</option>
+        <option value='time_asc'> Last use time - 19</option>
+        <option value='time_desc'>Last use time - 91</option>
       </select>
       <div>
         <button className="btn btn-primary" onClick={resetHandler}>
