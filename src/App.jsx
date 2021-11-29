@@ -5,8 +5,8 @@ import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
  import Stats from "./Components/Stats";
-// import Nav from "./Components/Nav";
-// import sortas from "./Components/sort";
+import Nav from "./Components/Nav";
+import Sort from "./Components/sort";
 import ActionMsg from "./Components/ActionMsg"
 
 function App() {
@@ -15,6 +15,16 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   // const [sortBy, setSortBy] = useState("");
   // const sortBy = useRef('');
+  // const [used, setUsed] = useState([]);
+
+  // const dateOnly = (data) => {
+  //   return data.map((a) => {
+  //   a.last_use_time = a.last_use_time.slice(0, 10);
+  //   console.log(data);
+  //     return a;
+      
+  //   });
+  // };
 
   const [modalInputs, setModalInputs] = useState({
     registration_code: "",
@@ -118,6 +128,75 @@ function App() {
     });
   }, [lastUpdate]);
 
+  const [filterBy, setFilterBy] = useState('');
+    
+  useEffect(() => {
+      if (filterBy) {
+          axios.get('http://localhost:3003/scooters-filter/'+filterBy)
+          .then(res => {
+              setTable(Sort(res.data), sortConditions.current);
+              // setItems(fixdate(res.data));
+              // console.log(res.data);
+          })
+          setSearchBy('');
+      }
+  }, [filterBy])
+
+
+
+  // const reset = () => {
+  //     setLastUpdate(Date.now());
+  // }
+
+  // ----------------- SORT -----------------
+  const sortConditions = useRef('');
+  const handleSort = () => {
+      if (sortConditions.current) {
+          setTable(Sort(table, sortConditions.current));
+      }
+  }
+
+
+  // ----------------- SEARCH -----------------
+  const [searchBy, setSearchBy] = useState('');
+
+  useEffect(() => {
+      if (searchBy) {
+      axios.get('http://localhost:3003/scooters-search' +searchBy)
+          .then(res => {
+              setTable(Sort(res.data), sortConditions.current);
+          })
+          setFilterBy('');
+      }
+  }, [searchBy])
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3003/scooters-used").then((res) => {
+  //     setTable(res.data);
+  //     setUsed(res.data.filter(a=>a.last_use_time));
+  //   });
+  // }, [lastUpdate]);
+
+  
+  // const [filterBy, setFilterBy] = useState("");
+  // const [searchBy, setSearchBy] = useState("");
+
+  // useEffect(() => {
+  //   if (filterBy) {
+  //     if (filterBy==='all'){
+  //       reset()
+  //     }
+      
+  //     axios
+  //       .get("http://localhost:3003/scooters-filter/" + filterBy)
+  //       .then((res) => { 
+        
+  //         setUsed(dateOnly(res.data));
+          
+  //       }).catch(err=>console.log(err));
+  //   }
+  // }, [filterBy]);
+
   //Update React
   const edit = (item, id) => {
     setShowModal(false);
@@ -153,7 +232,7 @@ function App() {
        <ActionMsg msg={msg.current} showMsg={showMsg}></ActionMsg>
       <div className="container">
         <Stats stats={stats}></Stats>
-        {/* <Nav sort={setSortBy} reset={reset}></Nav> */}
+        <Nav searchBy={searchBy}  setSearchBy={setSearchBy} filterBy={filterBy} setFilterBy={setFilterBy} sortConditions={sortConditions} handleSort={handleSort}  reset={reset}></Nav>
         <Create className="justify-content-center" create={create} reset={reset}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>

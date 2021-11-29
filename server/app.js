@@ -120,7 +120,7 @@ app.get("/scooters-filter/:t", (req, res) => {
   const sql = `
         SELECT *
         FROM scooters
-        WHERE th = ?
+        WHERE is_busy = ?
     `;
 
   con.query(sql, [req.params.t], (err, results) => {
@@ -132,11 +132,11 @@ app.get("/scooters-filter/:t", (req, res) => {
 });
 
 //Search Node
-app.get("/scooters-key", (req, res) => {
+app.get("/scooters-search", (req, res) => {
   const sql = `
         SELECT *
         FROM scooters
-        WHERE key LIKE ?
+        WHERE last_use_time LIKE ?
     `;
   con.query(sql, ["%" + req.query.s + "%"], (err, results) => {
     if (err) {
