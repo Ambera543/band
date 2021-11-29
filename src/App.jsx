@@ -5,15 +5,15 @@ import List from "./Components/List";
 import Modal from "./Components/Modal";
 import Create from "./Components/Create";
  import Stats from "./Components/Stats";
-import Nav from "./Components/Nav";
-import sortas from "./Components/sort";
+// import Nav from "./Components/Nav";
+// import sortas from "./Components/sort";
 import ActionMsg from "./Components/ActionMsg"
 
 function App() {
   const [table, setTable] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [showModal, setShowModal] = useState(false);
-  const [sortBy, setSortBy] = useState("");
+  // const [sortBy, setSortBy] = useState("");
   // const sortBy = useRef('');
 
   const [modalInputs, setModalInputs] = useState({
@@ -65,11 +65,11 @@ function App() {
   //   }
   // };
 
-  useEffect(() => {
-    if (sortBy) {
-      setTable(sortas(table, sortBy));
-    }
-  }, [sortBy]);
+  // useEffect(() => {
+  //   if (sortBy) {
+  //     setTable(sortas(table, sortBy));
+  //   }
+  // }, [sortBy]);
 
   // const sort = by => {
   //   const tableCopy = table.slice();
@@ -153,7 +153,7 @@ function App() {
        <ActionMsg msg={msg.current} showMsg={showMsg}></ActionMsg>
       <div className="container">
         <Stats stats={stats}></Stats>
-        <Nav sort={setSortBy} reset={reset}></Nav>
+        {/* <Nav sort={setSortBy} reset={reset}></Nav> */}
         <Create className="justify-content-center" create={create} reset={reset}></Create>
         <div className="justify-content-center">
           <div className="card-header">List of scooters</div>

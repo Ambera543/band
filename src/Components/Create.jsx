@@ -25,6 +25,7 @@ function Create({ create }) {
     is_busy: "",
     last_use_time: "",
     total_ride_kilometres: "",
+    // ride_kilometres_per_day: ""
   });}
 
 
@@ -42,9 +43,15 @@ function Create({ create }) {
           onChange={(e) => formControl(e, "registration_code")}
         />
       </div>
-      {/* <div className="form-group">
-            <div>Busy</div><input type="text" value={input.is_busy} onChange={(e) => formControl(e, 'is_busy')} />
-            </div> */}
+     
+             {/* <div className="form-group">
+        <div>Ride kilometres per day</div>
+        <input
+          type="text"
+          value={input.ride_kilometres_per_day}
+          onChange={(e) => formControl(e, "ride_kilometres_per_day")}
+        />
+        </div> */}
       <div className="form-group">
         <div>Total ride kilometres</div>
         <input
@@ -71,3 +78,4 @@ function Create({ create }) {
 }
 
 export default Create;
+

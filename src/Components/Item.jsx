@@ -1,5 +1,3 @@
-// import { useState } from "react";
-
 function Item({ data, modal, remove }) {
   const showEdit = () => {
     modal(data);
@@ -11,14 +9,6 @@ function Item({ data, modal, remove }) {
     } else return "no";
   }
 
-  // let ride = data.total_ride_kilometres + inputs.total_ride_kilometres
-  // const [value, setValue] = useState([false, true, false, true])
-
-    // const change = i => {
-    //     const valueCopy = value.slice();
-    //     valueCopy[i] = !valueCopy[i]
-    //     setValue(valueCopy);
-    // }
 
   return (
     <table className="table">
@@ -27,7 +17,7 @@ function Item({ data, modal, remove }) {
           <th>Registration code</th>
           <th>Busy</th>
           <th>Last use time</th>
-          <th>Ride kilometres per day</th>
+          {/* <th>Ride kilometres per day</th> */}
           <th>Total ride kilometres</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -41,9 +31,9 @@ function Item({ data, modal, remove }) {
           <td>
             <div>{data.last_use_time.slice(0, 10)}</div>
           </td>
-          <td>
+          {/* <td>
             <div>{data.total_ride_kilometres}</div>
-          </td>
+          </td> */}
           <td>
             <div>{data.total_ride_kilometres}</div>
           </td>
@@ -64,5 +54,3 @@ function Item({ data, modal, remove }) {
 }
 
 export default Item;
-
-//  <input onChange={() => change(0)} type="checkbox" checked={value[0]}/>

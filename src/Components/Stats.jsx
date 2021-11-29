@@ -1,4 +1,4 @@
-function Stats({stats, sort}) {
+function Stats({stats}) {
 
 
     return (
