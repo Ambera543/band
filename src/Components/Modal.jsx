@@ -8,6 +8,8 @@ function Modal({ showModal, hide, modalInputs, edit }) {
     total_ride_kilometres: "",
   });
 
+ 
+
   // const [value, setValue] = useState([true]);
 
   // const change = (i) => {
@@ -19,7 +21,7 @@ function Modal({ showModal, hide, modalInputs, edit }) {
   const control = (e, what) => {
     const inputsCopy = { ...inputs };
     inputsCopy[what] = e.target.value;
-    if (what === "is_busy") inputsCopy[what] = !inputs.is_busy;
+    if (what === "is_busy") {inputsCopy[what] = !inputs.is_busy};
     setInputs(inputsCopy);
   };
 
@@ -97,7 +99,14 @@ function Modal({ showModal, hide, modalInputs, edit }) {
                 <input
                   className="form-control"
                   type="date"
-                  value={inputs.last_use_time.slice(0, 10)}
+                  value=
+                  {new Date(inputs.last_use_time).toLocaleDateString("fr-CA", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    })} 
+                  
+                  // {inputs.last_use_time}
                   onChange={(e) => control(e, "last_use_time")}
                 />
               </div>

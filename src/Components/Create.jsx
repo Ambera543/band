@@ -3,7 +3,7 @@ import { useState } from "react";
 function Create({ create }) {
   const [input, setInput] = useState({
     registration_code: "",
-    is_busy: "",
+    is_busy: 0,
     last_use_time: "",
     total_ride_kilometres: "",
   });
@@ -21,14 +21,13 @@ function Create({ create }) {
     }
     create(inputCopy);
     setInput({
-        registration_code: "",
-    is_busy: "",
-    last_use_time: "",
-    total_ride_kilometres: "",
-    // ride_kilometres_per_day: ""
-  });}
-
-
+      registration_code: "",
+      is_busy: "",
+      last_use_time: "",
+      total_ride_kilometres: "",
+      // ride_kilometres_per_day: ""
+    });
+  };
 
   return (
     <div className="form-group">
@@ -38,13 +37,13 @@ function Create({ create }) {
         <input
           type="text"
           maxLength="8"
-          placeholder= "not more than 8 characters"
+          placeholder="not more than 8 characters"
           value={input.registration_code.toUpperCase()}
           onChange={(e) => formControl(e, "registration_code")}
         />
       </div>
-     
-             {/* <div className="form-group">
+      {/* <div value={input.is_busy}></div> */}
+      {/* <div className="form-group">
         <div>Ride kilometres per day</div>
         <input
           type="text"
@@ -78,4 +77,3 @@ function Create({ create }) {
 }
 
 export default Create;
-

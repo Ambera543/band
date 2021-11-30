@@ -29,7 +29,13 @@ function Item({ data, modal, remove }) {
             {is_busy()} 
           </td>
           <td>
-            <div>{data.last_use_time.slice(0, 10)}</div>
+             <div>     {new Date(data.last_use_time).toLocaleDateString("fr-CA", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    })} 
+                {/* {data.last_use_time.slice(0, 10)}  */}
+              </div>
           </td>
           {/* <td>
             <div>{data.total_ride_kilometres}</div>
@@ -54,3 +60,10 @@ function Item({ data, modal, remove }) {
 }
 
 export default Item;
+
+
+// {new Date(data.date).toLocaleDateString("fr-CA", {
+//   year: "numeric",
+//   month: "2-digit",
+//   day: "2-digit",
+//   })} 

@@ -19,10 +19,10 @@ function Nav({ filterBy, setFilterBy, reset, searchBy, setSearchBy, sortConditio
       
   
   // ----------------- SEARCH -----------------
-      const handleSearchValue = e => {
-          if(!e.target.value) reset();
-          setSearchBy(e.target.value)
-      }
+      // const handleSearchValue = e => {
+      //     if(!e.target.value) reset();
+      //     setSearchBy(e.target.value)
+      // }
   
   // ----------------- RESET -----------------
       const resetHandler = () => {
@@ -51,7 +51,7 @@ function Nav({ filterBy, setFilterBy, reset, searchBy, setSearchBy, sortConditio
                       </div>
                   </fieldset>
   
-                  {/* <fieldset>
+                   {/* <fieldset>
                       <legend>Sorting</legend>
                       <div className="sort">
                       <div> Sort By </div>
@@ -67,36 +67,18 @@ function Nav({ filterBy, setFilterBy, reset, searchBy, setSearchBy, sortConditio
         </button>
      
     </div>
-                  </fieldset> */}
+                  </fieldset> 
              
-              <fieldset>
+               <fieldset>
                   <legend>Search</legend>
                   <div className="search">
                       <label>Type search text</label><br />
                       <input onChange={handleSearchValue} value={searchBy}></input>
                   </div>
-              </fieldset>
+              </fieldset> */}
           </div>
       )
-  }
+  } 
   
   export default Nav;
 
-//       <div> Sort By </div>
-//       <select onChange={selectSort} value={sortValue}>
-//         <option value=""> Select scooter</option>
-//         <option value="kilometres_asc">Total ride kilometres - 1-9</option>
-//         <option value="kilometres_desc">Total ride kilometres- 9-1</option>
-//         <option value="time_asc"> Last use time - 1-9</option>
-//         <option value="time_desc">Last use time - 9-1</option>
-//       </select>
-    
-//         <button className="btn btn-primary" onClick={resetHandler}>
-//           Reset
-//         </button>
-     
-//     </div>
-//   );
-// }
-
-// export default Nav;

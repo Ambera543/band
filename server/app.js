@@ -42,14 +42,14 @@ app.get("/scooters", (req, res) => {
 app.post("/scooters", (req, res) => {
   const sql = `
         INSERT INTO scooters
-        (registration_code, last_use_time, total_ride_kilometres)
-        VALUES (?, ?, ? )
+        (registration_code, is_busy, last_use_time, total_ride_kilometres)
+        VALUES (?, ?, ?, ? )
     `;
   con.query(
     sql,
     [
       req.body.registration_code,
-      // req.body.is_busy,
+       req.body.is_busy,
       req.body.last_use_time,
       req.body.total_ride_kilometres,
     ],
